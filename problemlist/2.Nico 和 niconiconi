@@ -1,0 +1,54 @@
+## Nico 和 niconiconi
+### 描述
+
+* * *
+
+Nico 平时最喜欢说的口头禅是 niconiconi~。
+有一天 Nico 在逛著名弹幕网站 niconico 的时候惊异的发现，N 站上居然有很多她的鬼畜视频。其中有一个名为《让 Nico 为你洗脑》的视频吸引了她的注意。 她点进去一看，就被洗脑了：
+```python
+niconicohniconicovniconicovniconiconiconiconiconicovniconico...
+```
+弹幕中刚开始有很多 `nico*1`、`nico*2` 等计数菌，但到后面基本上都是计数菌阵亡的弹幕了。
+
+Nico 也想当一回计数菌。她认为：`nico` 计a分，`niconi` 计b分，`niconiconi` 计c分。
+
+她拿到了一个长度为n的字符串，请帮她算出最大计数分数。
+
+注：已被计数过的字符不能重复计数！如 `niconico` 要么当作 `nico` + `nico` 计 2a分，要么当作 `niconi` +`co` 计 b 分。
+
+
+
+### 输入
+
+* * *
+第一行四个正整数 n,a,b,c ($1\leq n \leq 3*10^5$,$1 \leq a,b,c \leq 10^9$)
+
+第二行是一个长度为 nn 且只包含小写英文字母的字符串。
+
+### 输出
+***
+一个整数，代表最大的计数分数。
+
+***
+
+
+#### 参考代码
+```python
+n,a,b,c=map(int,input().split())
+s=input()
+dp=[0 for i in range(n+1)]
+for i in range(n):
+    dp[i+1]=dp[i]
+    if i >=3 and s[i-3:i+1]=="nico":
+        dp[i+1]=max(dp[i-3]+a,dp[i+1])
+    if i>=5 and s[i-5:i+1]=='niconi':
+        dp[i+1]=max(dp[i-5]+b,dp[i+1])
+    if i>= 9 and s[i-9:i+1]=="niconiconi":
+        dp[i+1]=max(dp[i-9]+c,dp[i+1])
+print(dp[-1])
+
+"""
+主要思路是运用了动态规划的方式
+"""
+
+```
